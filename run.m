@@ -76,16 +76,15 @@ for i = 1 : height(contents)
     [~, ~] = mkdir(subfolder);
     
     rgb = imread(im_file);
-    
-    [gy, keep] = preprocess(rgb, opts);
-    aa = process(gy, opts);
-    bb = post_process(aa, keep, opts);
+    b = segment(rgb, opts);
     
     out_name = strjoin([base_name, "segment"], "_") + ".png";
     out_file = fullfile(subfolder, out_name);
     imwrite(bb, out_file);
     
-    overlay = composite(im2double(rgb), bb, [0 1 1], 0.7);
+    CYAN = [0.0 1.0 1.0];
+    ALPHA = 0.7;
+    overlay = composite(im2double(rgb), b, CYAN, ALPHA);
     review_name = strjoin([base_name, "review"], "_") + ".png";
     review_file = fullfile(review_folder, review_name);
     imwrite(overlay, review_file);
@@ -106,12 +105,5 @@ is_original = contains(...
 contents = contents(is_original, :);
 
 assert(istable(contents));
-
-end
-
-
-function opts = read_opts()
-
-opts = read_json_file("res/opts.json");
 
 end
