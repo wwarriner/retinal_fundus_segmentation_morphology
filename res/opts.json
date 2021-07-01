@@ -1,0 +1,13 @@
+{
+    "radius": 1100,
+    "desaturate_weights": [0, 1, 0],
+    "medfilt": [5, 5],
+    "diffuse_iterations": 10,
+    "adaptthresh_window_size": 41,
+    "adaptthresh_t": -0.04,
+    "area_open_1": 100,
+    "close_radius": 5,
+    "gauss_radius": 3,
+    "area_open_2": 2500,
+    "small_hole_pixels": 0
+}
