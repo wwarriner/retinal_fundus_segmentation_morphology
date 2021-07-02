@@ -80,7 +80,7 @@ for i = 1 : height(contents)
     
     out_name = strjoin([base_name, "segment"], "_") + ".png";
     out_file = fullfile(subfolder, out_name);
-    imwrite(bb, out_file);
+    imwrite(b, out_file);
     
     CYAN = [0.0 1.0 1.0];
     ALPHA = 0.7;
