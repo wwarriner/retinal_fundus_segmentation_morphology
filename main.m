@@ -1,4 +1,4 @@
-function run(root_folder, out_folder, ext, keyword)
+function main(root_folder, out_folder, ext, keyword)
 %{
 Main entry point for segmentation of retinal fundus photographs. Provide a root
 folder of photographs and a keyword of images to look for. The images will be
