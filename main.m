@@ -60,6 +60,10 @@ assert(isscalar(keyword));
 extend_search_path();
 
 contents = get_images(root_folder, ext, keyword);
+if isempty(contents)
+    warning("no images found in %s/*%s", root_folder, ext);
+end
+
 opts = read_opts();
 
 review_folder = fullfile(out_folder, "review");
