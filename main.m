@@ -13,7 +13,8 @@ Inputs:
 3. ext - (optional) scalar string representing file extension of photos. Default
     ".tif". 
 4. keyword - (optional) scalar string representing search term for photos. Uses
-    contains() on full name and extension to locate. Case insensitive.
+    contains() on full name and extension to locate. Case insensitive. Default
+    behavior is to use all images.
 
 Outputs nothing. Writes images to folder called "out" as sibling folder to input
 root_folder. Will create all needed folders to write. Does not delete existing
@@ -32,7 +33,7 @@ if nargin < 3
 end
 
 if nargin < 4
-    keyword = "original";
+    keyword = "";
 end
 
 root_folder = string(root_folder);
@@ -98,11 +99,13 @@ function contents = get_images(root_folder, ext, keyword)
 contents = get_contents(root_folder);
 contents = get_files_with_extension(contents, ext);
 
-is_original = contains(...
-    string(contents{:, "name"}), keyword, ...
-    "ignorecase", true ...
-    );
-contents = contents(is_original, :);
+if keyword ~= ""
+    has_keyword = contains(...
+        string(contents{:, "name"}), keyword, ...
+        "ignorecase", true ...
+        );
+    contents = contents(has_keyword, :);
+end
 
 assert(istable(contents));
 
